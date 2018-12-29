@@ -1,0 +1,20 @@
+<div class="row">
+	<div class="col-md-6">
+		<input type="text" class="form-control has-success col-md-offset-6" ng-model="home.groupsearch" placeholder="Search by anything">
+		</br>
+	</div>
+</div>
+
+<table ng-table ="home.groupsTable" class="table text-center">
+	<tr ng-repeat="group in $data | filter: home.groupsearch">
+		<td data-title="'ID'" sortable="'id'">
+			{{group.id}}
+		</td>
+		<td data-title="'Group Name'" sortable="'groupname'">
+			{{group.groupname}}
+		</td>
+		<td data-title="'Session ID'" sortable="'sessionid'">
+			{{group.sessionid}}
+		</td>
+	</tr>
+</table>

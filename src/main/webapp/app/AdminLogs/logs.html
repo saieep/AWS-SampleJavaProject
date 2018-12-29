@@ -1,0 +1,21 @@
+<div class="col-md-6">
+	<input type="text" class="form-control has-success col-md-offset-6" ng-model="logs.search" placeholder="Search">
+	</br>
+	</div>
+</div>
+<table ng-table ="logs.logsTable" class="table text-center col-md-offset-1">
+	<tr ng-repeat="log in $data | filter:logs.search">
+		<td data-title="'Audit ID'" sortable="'auditid'">
+			{{log.auditid}}
+		</td>
+		<td data-title="'Group ID'" sortable="'groupid'">
+			{{log.groupid}}
+		</td>
+		<td data-title="'Scenario ID'" sortable="'scenarioid'">
+			{{log.scenarioid}}
+		</td>
+		<td data-title="'Description'" sortable="'description'">
+			<kbd>{{log.description}}<kbd>
+		</td>
+	</tr>
+</table>

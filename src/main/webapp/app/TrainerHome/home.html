@@ -1,0 +1,57 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
+<link rel="stylesheet" href="app/TrainerHome/style.css">
+<div>
+	<div class="row bg-info homewelcome">
+		<h2 class="text-center" style="margin-top: 90px">AngularJS FrTP - Session {{home.sess.sessionid}}</h2>
+		<h4 class="text-center">Trainer: Vatsal R.</h4>
+		<button class="btn btn-primary pull-right" ng-click="home.startSession()" ng-show="!home.started"style="margin-right: 10px;">Start Session</button>
+		<button class="btn btn-danger pull-right" ng-click="home.endSession()" ng-show="home.started"style="margin-right: 10px;">End Session</button>
+	</div>
+	<br />
+	<div class="row" ui-view>
+		<uib-accordion close-others="true" ng-class="{'ng-hide':!home.started}">
+		   <div uib-accordion-group class="panel-default" heading="Add Scenario" is-open="true" is-disabled="false">
+		   		<div class="row" style="padding:10px;">
+					<trix-editor ng-model="home.newScenario.content" class="editor-fix" angular-trix></trix-editor>
+					<br />
+		   		</div>
+				<div class="row">
+					<div class="col-md-1 pull-right">
+						<button class="btn btn-primary pull-right" ng-click="home.addScenario()" ng-disabled="!home.newScenario.content.length && !home.newScenario.duration.length">Save</button>
+					</div>
+					<div class="col-md-4 pull-right">
+						<input type="number" ng-model="home.newScenario.duration" class="form-control" placeholder="Time (in Minutes)">
+					</div>
+				</div>
+		   	</div>  
+		    <div uib-accordion-group class="panel-default" is-open="true" is-disabled="false">
+			    <uib-accordion-heading>
+			    	All Scenarios
+	        		<kbd>{{home.scenarios.length}}</kbd>
+	      		</uib-accordion-heading>
+	      		<div>
+		      		<div class="col-md-6">
+						<input type="text" class="form-control has-success col-md-offset-6" ng-model="home.scenariosearch" placeholder="Search">
+						</br>
+						</div>
+					</div>
+					<table ng-table ="home.scenariosTable" class="table text-center">
+						<tr ng-repeat="scenario in $data |filter: home.scenariosearch">
+							<td data-title="'ID'" sortable="'scenarioid'">
+								{{scenario.scenarioid}}
+							</td>
+							<td data-title="'Content'" sortable="'content'">
+								<button type="button" class="btn btn-success"ng-click="home.showScenarioContent(scenario)">
+									<i class="fa fa-external-link"></i> Show Content
+								</button>
+							</td>
+							<td data-title="'Alloted Time'" sortable="'duration'">
+								{{scenario.duration}}
+							</td>
+						</tr>
+					</table>
+				</div>
+		    </div>
+	    </uib-accordion>
+	</div>
+</div>

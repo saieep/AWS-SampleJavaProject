@@ -1,0 +1,45 @@
+<div class="bg-success scenario">
+	<div class="text-center row">
+		<h2>Scerario {{scenario.scenario.scenarioid}}</h2>
+	</div>
+	<div class="row scenario" style="margin-top: 0px;">
+		<div ng-bind-html-unsafe="scenario.scenario.content" ng-bind-html="scenario.scenario.content"></div>
+		<button class="btn btn-primary pull-right" ng-if="!scenario.started && !scenario.alreadyStarted" ng-click="scenario.startScenario(scenario.scenario.id)">
+			Start
+		</button>
+		<button class="btn btn-danger pull-right" ng-if="scenario.alreadyStarted" ng-click="scenario.stopScenario(scenario.scenario.id)" ng-disabled="scenario.alreadyStarted">
+			Already Started
+		</button>
+		<button class="btn btn-default pull-right" ng-if="scenario.started" ng-click="scenario.stopScenario(scenario.scenario.id)">
+			Stop
+		</button>
+	</div>
+</div>
+<br/>
+<uib-accordion close-others="true" ng-class="{'ng-hide':!home.started}">
+	<div uib-accordion-group class="panel-default" heading="Evaluate Responses" is-disabled="false">
+	     <div class="row">
+	     	<table ng-table ="home.responsesTable" class="table text-center">
+				<tr ng-repeat="response in $data">
+					<td data-title="'Group ID'" sortable="'id.groupid'">
+						{{response.id.groupid}}
+					</td>
+					<td data-title="'Response'">
+						<button type="button" class="btn btn-success"ng-click="home.showResponse(response.response)">
+							<i class="fa fa-external-link"></i> Show Content
+						</button>
+					</td>
+					<td data-title="'Score'" class="col-md-3">
+						<div class="input-group" ng-class="{'has-error':home.scores[$index]>100 || home.scores[$index]<0}">
+						  <input type="number" class="form-control" ng-model="home.scores[$index]">
+						  <span class="input-group-addon">%</span>
+						</div>
+					</td>
+					<td data-title="'Submit'" class="col-md-2">
+						<button type="button" class="btn btn-default" ng-click="scenario.addScore(response.id,home.scores[$index])" ng-disabled="!home.scores.hasOwnProperty({{$index}}) || home.scores[$index]==null || home.scores[$index]>100 || home.scores[$index]<0">Submit</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+</uib-accordion>

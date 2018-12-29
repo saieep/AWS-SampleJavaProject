@@ -1,0 +1,33 @@
+<div class="row" ng-if="!scenario.started">
+	Time Alloted: 10 Min
+	<button class="btn btn-success" ng-click="scenario.startScenario()">Start</button>	
+</div>
+<div  scenario="scenario.id" class="row" ng-if="scenario.started">
+	<uib-accordion close-others="true">
+		 <div uib-accordion-group class="panel-default" is-open="true" is-disabled="false">
+		 <uib-accordion-heading>
+			    	Scenario1
+	        		<kbd class="pull-right"><div style="float: right">
+					<div>Time left :- {{scenario.minute}} : {{scenario.seconds}} </div>
+					<div id="counter" ng-show="timer_text==0">Your time expired</div>
+				</div></kbd>
+	      		</uib-accordion-heading>
+		  <div class="row  homewelcome"  prevent-right-click>
+			<div class="text-center" style="margin: 20px auto" prevent-right-click ng-bind-html-unsafe="scenario.scenarioData.content"  ng-bind-html="scenario.scenarioData.content" >
+			</div>
+		</div>
+			<fieldset ng-init="home.isDisabled=false" ng-disabled="(timer_text == 0)"
+					ng-class="{'disabled': home.disableExpression}">
+			   	<div class="row" style="padding:10px;" >
+			   		<trix-editor class="editor-fix" ng-disabled="!scenario.added" angular-trix ng-model="scenario.traineeResponse.response" ></trix-editor>
+					<br />
+		   		</div>
+	   		</fieldset>
+			<div class="row">
+				<div class="col-md-1 pull-right">
+					<button class="btn btn-primary pull-right" ng-click="scenario.addResponse()" ng-disabled="!scenario.added">Submit</button>
+				</div>
+			</div>
+		</div>  
+	</uib-accordion>
+</div>

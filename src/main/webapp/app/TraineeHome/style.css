@@ -1,0 +1,13 @@
+.infobox{
+	height:200px;
+}
+
+.editor-fix{
+	overflow: scroll; 
+	height: 200px;
+}
+
+.scenario{
+	padding: 5px 15px;
+	border-radius: 5px;
+}

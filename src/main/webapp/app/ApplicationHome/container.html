@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header col-md-2" ">
+    <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+    <!-- Mobile only-->
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#" ng-click="toggle()">CybTraining</a>
+  </div>
+  <!-- Actual Menu -->
+  <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+    <ul class="nav navbar-nav">
+      <li ui-sref="application.home" ui-sref-active="active">
+        <a href="#">Home</a>
+      </li>
+      <li ng-repeat="item in app.navbar().items" ui-sref="{{item.link}}" ui-sref-active="active">
+        <a >{{item.title}}</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown" uib-dropdown is-open="status.isopen2">
+          <a uib-dropdown-toggle>{{app.username}}<b class="caret"></b></a>
+          <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+          	<li role="menuitem"><a><i>Last login: 10:00 PM</i></a></li>
+          	<li class="divider"></li>
+          	<li role="menuitem"><a ng-click="app.logout()">Logout</a></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="row height">
+  <div class="col-md-2 height sidebar" ng-hide="app.sidebar().show" ng-class="">
+    <div>
+        <div class="sidebar">
+          <ul class="sidebar-items">
+            <li class="sidebar-items" ng-repeat="action in app.sidebar().actionitems">
+              <a href="#" ui-sref="{{action.link}}">
+                <i class="fa {{action.class}}" ></i> 
+                {{action.title}}
+              </a> 
+            </li>
+            <li class="sidebar-items" ng-repeat="item in app.sidebar().items">
+              <a href="#" ui-sref="{{item.link}}">
+                {{item.label}}
+              </a>
+            </li>
+          </ul>
+        </div>
+    </div>
+  </div>
+  <div ui-view class="col-md-10 viewsContainer"></div>
+</div>

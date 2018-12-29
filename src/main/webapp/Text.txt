@@ -1,0 +1,8 @@
+{
+	//for branch 2
+	//For commit 3
+	//For commit 4 from original
+	//For commit 4 from Clone
+	//Commit 5, Putting both to resolve conflict
+	//BB
+}
